@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能监控</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="font-awesome.css">
+    <link rel="stylesheet" href="intelligentMonitoring.css">
+</head>
+<body>
+<div ng-app="intelligentMonitoringApp" ng-controller="intelligentMonitoringCtrl">
+    <div class="out-container" style="padding-top: 0;margin-top: 20px;">
+        <div class="mainBodyArea" style="padding: 30px 20px;">
+            <div class="left-part">
+                <div class="main-section">
+                    <div class="section-bigTitle">清洗增量总量</div>
+                    <div class="section-bigContent">
+                        <span ng-bind="messageConfig.cleaningTotal"></span>
+                        <img src="rise.png" alt="" />
+                    </div>
+                </div>
+                <div class="main-section div-height">
+                    <div class="section-bigTitle"><span>各部门清洗情况</span><span class="section-btn pointer" ng-click="clickSwitchBtn()">换一批</span></div>
+                    <div class="ng-cloak section-table" ng-cloak>
+                        <div class="no-msg-container-c" ng-show="messageConfig.intelligentMonitoringTotal == 0">
+                            <div class="no-msg-item">暂无各部门清洗数据</div>
+                        </div>
+                        <table class="main-table single-tr" ng-show="messageConfig.intelligentMonitoringList.length">
+                            <thead>
+                            <tr>
+                                <th width='50%'>部门</th>
+                                <th width="50%">清洗总量</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="x in messageConfig.intelligentMonitoringList">
+                                <td ng-class="{'check':x.isChecked}" ng-click="clickSelectRow($index, x.id)" ng-bind="x.department"></td>
+                                <td ng-class="{'check':x.isChecked}" ng-click="clickSelectRow($index, x.id)" ng-bind="x.gross"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="right-part">
+                <div class="right-topPart">
+                    <div class="main-section div-inline">
+                        <div class="section-smallTitle">有效增量总量</div>
+                        <div class="section-smallContent">
+                            <span ng-bind="messageConfig.validTotal"></span>
+                            <img src="rise.png" alt="" />
+                        </div>
+                    </div>
+                    <div class="main-section div-inline">
+                        <div class="section-smallTitle">整改增量总量</div>
+                        <div class="section-smallContent">
+                            <span ng-bind="messageConfig.rectifyTotal"></span>
+                            <img src="rise.png" alt="" />
+                        </div>
+                    </div>
+                    <div class="main-section div-inline">
+                        <div class="section-smallTitle">问题增量总量</div>
+                        <div class="section-smallContent">
+                            <span ng-bind="messageConfig.matterTotal"></span>
+                            <img src="decline.png" alt="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="main-section div-height chartsArea">
+                    <div>
+                        <div class="chartsPart div-inline">
+                            <div class="chartsTitle">本日部门数据</div>
+                            <div id="map_dayData" style="width: 100%;height: 300px;"></div>
+                        </div>
+                        <div class="chartsPart div-inline">
+                            <div class="chartsTitle">本周部门数据</div>
+                            <div id="map_weekData" style="width: 100%;height: 300px;"></div>
+                        </div>
+                    </div>
+                    <div class="chartsPart">
+                        <div class="chartsTitle">本月部门数据</div>
+                        <div id="map_monthData" style="width: 100%;height: 300px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="jquery-1.11.3.min.js"></script>
+<script src="bootstrap.min.js"></script>
+<script src="angular.min.js"></script>
+<script src="echarts.js"></script>
+<script src="intelligentMonitoring.js"></script>
+</body>
+</html>
